@@ -8,8 +8,8 @@ package testgenericdao;
 import com.michael.framework.Cache;
 import com.michael.framework.Id;
 import com.michael.framework.JoinColumn;
+import com.michael.framework.ManyToMany;
 import com.michael.framework.ManyToOne;
-import com.michael.framework.OneToMany;
 import java.util.List;
 
 /**
@@ -26,8 +26,8 @@ public class Film {
     @JoinColumn(name="id_realisateur")
     private Realisateur realisateur;
     
-    @OneToMany(mappedBy="film")
-    private List<ActeurDansFilm> acteurs;
+    @ManyToMany(joinTable="acteur_film", joinColumn="id_film", inverseJoinColumn="id_acteur")
+    private List<Acteur> acteurs;
 
     @Override
     public String toString() {
@@ -50,11 +50,11 @@ public class Film {
         return display;
     }
 
-    public List<ActeurDansFilm> getActeurs() {
+    public List<Acteur> getActeurs() {
         return acteurs;
     }
 
-    public void setActeurs(List<ActeurDansFilm> acteurs) {
+    public void setActeurs(List<Acteur> acteurs) {
         this.acteurs = acteurs;
     }
 

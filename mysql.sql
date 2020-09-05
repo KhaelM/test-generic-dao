@@ -1,26 +1,34 @@
-DROP TABLE `ActeurDansFilm`;
+DROP TABLE acteur_film;
 DROP TABLE FILM;
 DROP TABLE REALISATEUR;
 
-CREATE TABLE REALISATEUR(
+CREATE TABLE realisateur (
 	id integer auto_increment PRIMARY KEY,
 	nom varchar(30)
 );
 
-CREATE TABLE FILM (
+CREATE TABLE film (
 	id integer auto_increment PRIMARY KEY,
 	nom varchar(30),
-	id_realisateur integer
+	id_realisateur integer,
+    FOREIGN KEY(id_realisateur) REFERENCES REALISATEUR(id)
 );
 
-CREATE TABLE `ActeurDansFilm` (
-	id integer auto_increment PRIMARY KEY,
-	id_film integer,
-	nom varchar(30),
-	date_naissance date NOT NULL,
-	date_mort date,
-	CONSTRAINT acteur_fk FOREIGN KEY(id_film) REFERENCES FILM(id)
+CREATE TABLE acteur (
+    id integer auto_increment PRIMARY KEY,
+    nom varchar(30),
+    date_naissance date NOT NULL,
+    date_mort date
 );
+
+CREATE TABLE acteur_film(
+    id_acteur integer,
+    id_film integer,
+    PRIMARY KEY(id_acteur, id_film),
+    FOREIGN KEY(id_acteur) REFERENCES acteur(id),
+    FOREIGN KEY(id_film) REFERENCES film(id)
+);
+
 
 INSERT INTO REALISATEUR(nom) values('Akira Toriyama');
 INSERT INTO REALISATEUR(nom) values('Masashi Kishimoto');
@@ -47,29 +55,58 @@ INSERT INTO FILM(nom,id_realisateur) values ('Romance Dawn', 3 );
 INSERT INTO FILM(nom,id_realisateur) values ('Cross Epoch', 3 );
 INSERT INTO FILM(nom,id_realisateur) values ('Jisshoku! Akuma no Mi!!', 3 );
 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Evelyne Grandjean','1950-01-01','2018-02-02');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Francis Lax','1951-02-02','2018-03-03');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Jean-Louis Rugarli','1952-03-03','2017-04-04');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Bernard Soufflet','1953-04-04','2018-01-01');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Maryse Meryl','1954-05-05','2016-05-02');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Ophélie Brissot','1955-06-10','2000-10-10');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Serge Bourrier','1956-06-10','2008-01-01');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (1,'Laurence Crouzet','1957-06-10', null);
+-- ACTEURS
+INSERT INTO Acteur(nom,date_naissance,date_mort) values ('Evelyne Grandjean','1950-01-01','2018-02-02');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Francis Lax','1951-02-02','2018-03-03');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Jean-Louis Rugarli','1952-03-03','2017-04-04');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Bernard Soufflet','1953-04-04','2018-01-01');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Maryse Meryl','1954-05-05','2016-05-02');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Ophélie Brissot','1955-06-10','2000-10-10');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Serge Bourrier','1956-06-10','2008-01-01');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Laurence Crouzet','1957-06-10', null);
 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Masako Nozawa','1958-01-01','2015-02-02');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Stephanie Nadolny','1959-02-02','2017-01-02');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Tiffany Vollmer','1960-01-01','2019-01-02');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Laurie Steele','1961-01-01','2017-01-01');
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Christopher Sabat','1962-02-02', null);
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Sean Schemmel', '1963-01-10', null);
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Masako Nozawa','1958-01-01','2015-02-02');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Stephanie Nadolny','1959-02-02','2017-01-02');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Tiffany Vollmer','1960-01-01','2019-01-02');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Laurie Steele','1961-01-01','2017-01-01');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Christopher Sabat','1962-02-02', null);
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Sean Schemmel', '1963-01-10', null);
 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (5,'JUNKO TAKEUCHI', '1964-04-04', null); 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (5,'NORIAKI SUGIYAMA', '1965-05-05', null); 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (5,'CHIE NAKAMURA', '1966-06-06', '2002-01-05'); 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (5,'KAZUHIKO INOUE', '1967-07-07', null); 
 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (2,'Jennifer Anniston', '1968-08-08', null); 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (2,'La Fouine', '1969-09-09', null); 
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Junko Takeuchi', '1964-04-04', null);
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Noriaki Sugiyama', '1965-05-05', null);
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Kazuhiko Inoue', '1967-07-07', null);
 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Paul Walker', '1970-01-01', '2017-01-01'); 
-INSERT INTO `ActeurDansFilm`(id_film,nom,date_naissance,date_mort) values (3,'Silver Stalone', '1971-01-01', null); 
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Jennifer Anniston', '1968-08-08', null);
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('La Fouine', '1969-09-09', null);
+
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Paul Walker', '1970-01-01', '2017-01-01');
+INSERT INTO Acteur(nom,date_naissance,date_mort) values('Silver Stalone', '1971-01-01', null);
+
+INSERT INTO acteur_film(id_film, id_acteur) values (1,1);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,2);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,3);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,4);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,5);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,6);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,7);
+INSERT INTO acteur_film(id_film, id_acteur) values (1,8);
+
+INSERT INTO acteur_film(id_film, id_acteur) values (3,9);
+INSERT INTO acteur_film(id_film, id_acteur) values (3,10);
+INSERT INTO acteur_film(id_film, id_acteur) values (3,11);
+INSERT INTO acteur_film(id_film, id_acteur) values (3,12);
+INSERT INTO acteur_film(id_film, id_acteur) values (3,13);
+INSERT INTO acteur_film(id_film, id_acteur) values (3,14);
+
+INSERT INTO acteur_film(id_film, id_acteur) values (5,15); 
+INSERT INTO acteur_film(id_film, id_acteur) values (5,16);  
+INSERT INTO acteur_film(id_film, id_acteur) values (5,17); 
+
+INSERT INTO acteur_film(id_film, id_acteur) values (2,18); 
+INSERT INTO acteur_film(id_film, id_acteur) values (2,19); 
+
+INSERT INTO acteur_film(id_film, id_acteur) values (3,20); 
+INSERT INTO acteur_film(id_film, id_acteur) values (3,21); 
+
+SELECT acteur.id, acteur.nom FROM acteur, acteur_film WHERE acteur.id = acteur_film.id_acteur AND acteur_film.id_film = 1;

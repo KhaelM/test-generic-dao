@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
@@ -38,76 +39,66 @@ public class TestGenericDao {
         */
         /// ALL
 //        CriteriaBuilder criteriaBuilder = genericDao.getCriteriaBuilder(Film.class);
-//        List<Film> films = genericDao.select();
-//        for (Film film : films) {
-//            System.out.println(film);
-//        }
+////        criteriaBuilder.setPagination(1, 3); //Pagination
+//        List<Film> films = (List<Film>) genericDao.select();
         
         /// ID
 //        CriteriaBuilder criteriaBuilder = genericDao.getCriteriaBuilder(Film.class);
 //        Film film = (Film) genericDao.selectById(1);
-//        System.out.println(film);
         
 
         /// MULTICRITERES
-        CriteriaBuilder criteriaBuilder = genericDao.getCriteriaBuilder(Film.class);
-        criteriaBuilder.add(Restrictions.eq("Film", "nom", "Naruto"), LogicalOperator.NONE);
-        List<Film> films = genericDao.select();
-        for (Film film : films) {
-            System.out.println(film);
-        }
+//        CriteriaBuilder criteriaBuilder = genericDao.getCriteriaBuilder(Acteur.class);
         
-        
-//        genericDao.registerIntoCache(Film.class);
-//        genericDao.getInCache(Film.class);
-//        criteriaBuilder.add(Restrictions.eq("Film", "nom", "Les soeurs Du Pd"), LogicalOperator.NONE);
-//        criteriaBuilder.setPagination(2, 3);
+        // Comparaison String
+//        criteriaBuilder.add(Restrictions.eq("Film", "nom", "Naruto"), LogicalOperator.NONE);
+
+        // Date
 //        String pattern = "yyyy-MM-dd";
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//        criteriaBuilder.add(Restrictions.between("ActeurDansFilm", "date_naissance", simpleDateFormat.parse("1997-11-11"), simpleDateFormat.parse("2020-11-11")), LogicalOperator.NONE);
-//        System.out.println("===" + film.getNom() + " | id: " + film.getId() + "=== par " + film.getRealisateur().getNom());
+//        criteriaBuilder.add(Restrictions.between("Acteur", "date_naissance", simpleDateFormat.parse("1969-11-11"), simpleDateFormat.parse("2020-11-11")), LogicalOperator.NONE);
+
+//        List<Acteur> films = (List<Acteur>) genericDao.select();
         
-//        for(Realisateur realisateur : realisateurs) {
-//            System.out.println("====="+realisateur.getNom()+"=====");
-//            for(Film film: realisateur.getFilms()) {
-//                String affichage = film.getNom() +": ";
-//                for(ActeurDansFilm acteur: film.getActeurs()) {
-//                    affichage += acteur.getNom() + " ";
-//                }
-//                affichage += " by " + film.getRealisateur().getNom();
-//                System.out.println(affichage);
-//                
-//            }
-//        }
-//        Film film = (Film) genericDao.selectById(116);
+        
+        /// CACHE
+//        genericDao.registerIntoCache(Film.class);
+//        List<Film> films = (List<Film>)genericDao.getInCache(Film.class);
+
+        
+        /// DELETE
+        // manyToMany relations (acteur_film) are deleted
+//        CriteriaBuilder criteriaBuilder = genericDao.getCriteriaBuilder(Film.class);
+//        Film film = (Film) genericDao.selectById(2);
 //        genericDao.delete(film);
         
-//        System.out.println(film.getNom());
-//        film.setNom("Hétéro film");
-//        film.getRealisateur().setNom("Tanos");
-//        film.getActeurs().forEach((acteur) -> {
-//            System.out.println(acteur.getNom());
-//        });
-//        film.getActeurs().get(0).setNom("Vody");
-//        genericDao.update(film);
-//        film.getActeurs().forEach((acteur) -> {
-//            System.out.println(acteur.getNom());
-//        });
+        /// UPDATE
+//        films.get(0).setNom("Malgache");
+//        genericDao.update(films.get(0));
+        
+        
+        /// INSERT
 //        Film f = new Film();
-//        f.setNom("Les soeurs Du Bg");
-//        
+//        f.setNom("Le livre de la Jungle");
+        
+        // non existing realisator
 //        Realisateur r = new Realisateur();
-//        r.setId(12);
-//        r.setNom("Albert Camus");
-//        
-//        ActeurDansFilm a1 = new ActeurDansFilm();
+//        r.setNom("Momoshiki");
+        
+        // already exisiting realisator
+//        Realisateur r = new Realisateur();
+//        r.setId(1);
+        
+
+        // ManytoMany insert non existing and existing
+//        Acteur a1 = new Acteur();
+//        a1.setId(30);
+//        a1.setDateNaissance(new Date());
 //        a1.setNom("Bruce Lee");
-//        a1.setFilm(f);
-//        ActeurDansFilm a2 = new ActeurDansFilm();
+//        Acteur a2 = new Acteur();
 //        a2.setId(16);
-//        a2.setFilm(f);
 //        
-//        List<ActeurDansFilm> af = new ArrayList<ActeurDansFilm>();
+//        List<Acteur> af = new ArrayList<Acteur>();
 //        af.add(a1);
 //        af.add(a2);
 //        
