@@ -108,5 +108,3 @@ INSERT INTO acteur_film(id_film, id_acteur) values (2,19);
 
 INSERT INTO acteur_film(id_film, id_acteur) values (3,20); 
 INSERT INTO acteur_film(id_film, id_acteur) values (3,21); 
-
-SELECT acteur.id, acteur.nom FROM acteur, acteur_film WHERE acteur.id = acteur_film.id_acteur AND acteur_film.id_film = 1;
