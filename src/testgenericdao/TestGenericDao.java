@@ -73,7 +73,7 @@ public class TestGenericDao {
 //        genericDao.delete(film);
         
         /// UPDATE
-//        films.get(0).setNom("Malgache");
+//        films.get(0).setNom("Le Kraken");
 //        genericDao.update(films.get(0));
         
         
@@ -92,16 +92,15 @@ public class TestGenericDao {
 
         // ManytoMany insert non existing and existing
 //        Acteur a1 = new Acteur();
-//        a1.setId(30);
+//        a1.setId(25);
 //        a1.setDateNaissance(new Date());
-//        a1.setNom("Bruce Lee");
 //        Acteur a2 = new Acteur();
-//        a2.setId(16);
+//        a2.setId(21);
 //        
 //        List<Acteur> af = new ArrayList<Acteur>();
 //        af.add(a1);
 //        af.add(a2);
-//        
+////        
 //        f.setActeurs(af);
 //        f.setRealisateur(r);
 //        genericDao.insert(f);
